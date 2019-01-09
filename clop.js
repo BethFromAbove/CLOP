@@ -28,9 +28,14 @@ document.addEventListener("keyup", keyUpHandler, false);
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = true;
+        console.log("Pressed right");
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = true;
+        console.log("Pressed left");
+    }
+    else if (e.key == "Q" || e.key == "q") {
+        console.log("Pressed Q")
     }
 }
 
