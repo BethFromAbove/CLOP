@@ -49,38 +49,30 @@ document.addEventListener("keyup", keyUpHandler, false);
 function keyDownHandler(e) {
     if(e.key == "c" || e.key == "C") {
         CPressed = true;
-        console.log("Pressed C");
     }
     else if(e.key == "l" || e.key == "L") {
         LPressed = true;
-        console.log("Pressed L");
     }
     else if(e.key == "o" || e.key == "O") {
         OPressed = true;
-        console.log("Pressed O");
     }
     else if(e.key == "p" || e.key == "P") {
         PPressed = true;
-        console.log("Pressed P");
     }
 }
 
 function keyUpHandler(e) {
     if(e.key == "c" || e.key == "C") {
         CPressed = false;
-        console.log("Pressed C");
     }
     else if(e.key == "l" || e.key == "L") {
         LPressed = false;
-        console.log("Pressed L");
     }
     else if(e.key == "o" || e.key == "O") {
         OPressed = false;
-        console.log("Pressed O");
     }
     else if(e.key == "p" || e.key == "P") {
         PPressed = false;
-        console.log("Pressed P");
     }
 }
 
@@ -124,10 +116,16 @@ var i = 0;
 var j = 0;
 var k = 0;
 var l = 0;
+
 var isin = 0;
 var jsin = 0;
 var ksin = 0;
 var lsin = 0;
+
+var ispeed = 0;
+var jspeed = 0;
+var kspeed = 0;
+var lspeed = 0;
 
 
 function draw() {
@@ -141,21 +139,42 @@ function draw() {
 
     
     if(CPressed == true) {
-        i += 0.05;
-        isin = 60*Math.sin(i);
+        ispeed += 0.002;
+        ispeed = Math.min(0.1, ispeed);
+    } else {
+        ispeed -= 0.0005;
+        ispeed = Math.max(0, ispeed);
     }
     if(LPressed == true) {
-        j += 0.05;
-        jsin = 60*Math.sin(j);
+        jspeed += 0.002;
+        jspeed = Math.min(0.1, jspeed);
+    } else {
+        jspeed -= 0.0005;
+        jspeed = Math.max(0, jspeed);
     }
     if(OPressed == true) {
-        k += 0.05;
-        ksin = 60*Math.sin(k);
-    }
+        kspeed += 0.002;
+        kspeed = Math.min(0.1, kspeed);
+    } else {
+        kspeed -= 0.0005;
+        kspeed = Math.max(0, kspeed);    }
     if(PPressed == true) {
-        l += 0.05;
-        lsin = 60*Math.sin(l);
-    }
+        lspeed += 0.002;
+        lspeed = Math.min(0.1, lspeed);
+    } else {
+        lspeed -= 0.0005;
+        lspeed = Math.max(0, lspeed);    }
+
+    i += ispeed;
+    j += jspeed;
+    k += kspeed;
+    l += lspeed;
+
+
+    isin = 60*Math.sin(i);
+    jsin = 60*Math.sin(j);
+    ksin = 60*Math.sin(k);
+    lsin = 60*Math.sin(l);
 
     requestAnimationFrame(draw);
 }
