@@ -8,20 +8,21 @@ var LPressed = false;
 var OPressed = false;
 var PPressed = false;
 
-// var headx = 300;
-// var heady = 50;
-var bodyx = 70;
-var bodyy = 20;
-var frx = 290;
-var fry = 170;
-var flx = 290;
-var fly = 170;
+var headx = 300;
+var heady = 50;
+var bodyx = 100;
+var bodyy = 50;
+var frx = 300;
+var fry = 200;
+var flx = 300;
+var fly = 200;
 var brx = 150;
-var bry = 170;
+var bry = 200;
 var blx = 150;
-var bly = 170;
+var bly = 200;
 
 
+var head = new Image();
 var body = new Image();
 var frontright = new Image();
 var frontleft = new Image();
@@ -30,11 +31,12 @@ var backleft = new Image();
 var backgroundduck = new Image();
 
 function init() {
-    body.src = 'images/Horse_Bits/Horsebody.png';
-    frontright.src = 'images/Horse_Bits/Horseleg3.png';
-    frontleft.src = 'images/Horse_Bits/Horseleg4.png';
-    backright.src = 'images/Horse_Bits/Horseleg2.png';
-    backleft.src = 'images/Horse_Bits/Horseleg1.png';
+    head.src = 'images/pixel-rubber-duck.png';
+    body.src = 'images/pixel-box.png';
+    frontright.src = 'images/pixel-flower.png';
+    frontleft.src = 'images/pixel-fork.png';
+    backright.src = 'images/pixel-knife.png';
+    backleft.src = 'images/pixel-trowel.png';
 
     backgroundduck.src = 'images/pixel-rubber-duck.png';
 
@@ -88,8 +90,8 @@ function keyUpHandler(e) {
 
 function drawHorse() {
 
-    ctx.drawImage(body, bodyx, bodyy, 350, 300);
-    //ctx.drawImage(head, headx, heady, 50, 50);
+    ctx.drawImage(body, bodyx, bodyy, 300, 150);
+    ctx.drawImage(head, headx, heady, 50, 50);
     // ctx.drawImage(frontright, frx, fry, 30, 30);
     // ctx.drawImage(frontleft, flx, fly, 30, 30);
     // ctx.drawImage(backright, brx, bry, 30, 30);
@@ -115,7 +117,7 @@ function drawRotatedImage(image, x, y, angle) {
     // draw it up and to the left by half the width
     // and height of the image 
     //ctx.drawImage(image, -(image.width/2), -(image.height/2));
-    ctx.drawImage(image, -15, 0, 50, 120); //sizes were 30, 90
+    ctx.drawImage(image, -15, 0, 30, 90);
 
  
     // and restore the co-ords to how they were when we began

@@ -8,36 +8,34 @@ var LPressed = false;
 var OPressed = false;
 var PPressed = false;
 
-// var headx = 300;
-// var heady = 50;
-var bodyx = 70;
-var bodyy = 20;
-var frx = 290;
-var fry = 170;
-var flx = 290;
-var fly = 170;
+var headx = 300;
+var heady = 50;
+var bodyx = 100;
+var bodyy = 50;
+var frx = 300;
+var fry = 200;
+var flx = 300;
+var fly = 200;
 var brx = 150;
-var bry = 170;
+var bry = 200;
 var blx = 150;
-var bly = 170;
+var bly = 200;
 
 
+var head = new Image();
 var body = new Image();
 var frontright = new Image();
 var frontleft = new Image();
 var backright = new Image();
 var backleft = new Image();
-var backgroundduck = new Image();
 
 function init() {
-    body.src = 'images/Horse_Bits/Horsebody.png';
-    frontright.src = 'images/Horse_Bits/Horseleg3.png';
-    frontleft.src = 'images/Horse_Bits/Horseleg4.png';
-    backright.src = 'images/Horse_Bits/Horseleg2.png';
-    backleft.src = 'images/Horse_Bits/Horseleg1.png';
-
-    backgroundduck.src = 'images/pixel-rubber-duck.png';
-
+    head.src = 'images/pixel-rubber-duck.png';
+    body.src = 'images/pixel-box.png';
+    frontright.src = 'images/pixel-flower.png';
+    frontleft.src = 'images/pixel-fork.png';
+    backright.src = 'images/pixel-knife.png';
+    backleft.src = 'images/pixel-trowel.png';
 
   //moon.src = 'https://mdn.mozillademos.org/files/1443/Canvas_moon.png';
   //earth.src = 'https://mdn.mozillademos.org/files/1429/Canvas_earth.png';
@@ -51,45 +49,45 @@ document.addEventListener("keyup", keyUpHandler, false);
 function keyDownHandler(e) {
     if(e.key == "c" || e.key == "C") {
         CPressed = true;
+        console.log("Pressed C");
     }
     else if(e.key == "l" || e.key == "L") {
         LPressed = true;
+        console.log("Pressed L");
     }
     else if(e.key == "o" || e.key == "O") {
         OPressed = true;
+        console.log("Pressed O");
     }
     else if(e.key == "p" || e.key == "P") {
         PPressed = true;
+        console.log("Pressed P");
     }
 }
 
 function keyUpHandler(e) {
     if(e.key == "c" || e.key == "C") {
         CPressed = false;
-        ispeed += 0.01;
-        ispeed = Math.min(0.1, ispeed);
+        console.log("Pressed C");
     }
     else if(e.key == "l" || e.key == "L") {
         LPressed = false;
-        jspeed += 0.01;
-        jspeed = Math.min(0.1, jspeed);
+        console.log("Pressed L");
     }
     else if(e.key == "o" || e.key == "O") {
         OPressed = false;
-        kspeed += 0.01;
-        kspeed = Math.min(0.1, kspeed);
+        console.log("Pressed O");
     }
     else if(e.key == "p" || e.key == "P") {
         PPressed = false;
-        lspeed += 0.01;
-        lspeed = Math.min(0.1, lspeed);
+        console.log("Pressed P");
     }
 }
 
 function drawHorse() {
 
-    ctx.drawImage(body, bodyx, bodyy, 350, 300);
-    //ctx.drawImage(head, headx, heady, 50, 50);
+    ctx.drawImage(body, bodyx, bodyy, 300, 150);
+    ctx.drawImage(head, headx, heady, 50, 50);
     // ctx.drawImage(frontright, frx, fry, 30, 30);
     // ctx.drawImage(frontleft, flx, fly, 30, 30);
     // ctx.drawImage(backright, brx, bry, 30, 30);
@@ -115,7 +113,7 @@ function drawRotatedImage(image, x, y, angle) {
     // draw it up and to the left by half the width
     // and height of the image 
     //ctx.drawImage(image, -(image.width/2), -(image.height/2));
-    ctx.drawImage(image, -15, 0, 50, 120); //sizes were 30, 90
+    ctx.drawImage(image, -15, 0, 30, 90);
 
  
     // and restore the co-ords to how they were when we began
@@ -126,29 +124,14 @@ var i = 0;
 var j = 0;
 var k = 0;
 var l = 0;
-
 var isin = 0;
 var jsin = 0;
 var ksin = 0;
 var lsin = 0;
 
-var ispeed = 0;
-var jspeed = 0;
-var kspeed = 0;
-var lspeed = 0;
-
-//var bgx = 0;
-var bgy = 50;
-
-var distance = 0;
-var avspeed = 0;
-
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); //wipes the canvas
-
-    ctx.drawImage(backgroundduck, distance, bgy, 50, 50);
-
 
     drawHorse();
     drawRotatedImage(frontright, frx, fry, isin);
@@ -157,32 +140,21 @@ function draw() {
     drawRotatedImage(backleft, blx, bly, lsin);
 
     
-
-    ispeed -= 0.0001;
-    ispeed = Math.max(0, ispeed);
-    jspeed -= 0.0001;
-    jspeed = Math.max(0, jspeed);
-    kspeed -= 0.0001;
-    kspeed = Math.max(0, kspeed);
-    lspeed -= 0.0001;
-    lspeed = Math.max(0, lspeed);
-
-    i += ispeed;
-    j += jspeed;
-    k += kspeed;
-    l += lspeed;
-
-    avspeed = (ispeed + jspeed + kspeed + lspeed)/4;
-
-    isin = 60*Math.sin(i);
-    jsin = 60*Math.sin(j);
-    ksin = 60*Math.sin(k);
-    lsin = 60*Math.sin(l);
-
-
-
-    if(ispeed && jspeed && kspeed && lspeed) {
-        distance = distance + avspeed;
+    if(CPressed == true) {
+        i += 0.05;
+        isin = 60*Math.sin(i);
+    }
+    if(LPressed == true) {
+        j += 0.05;
+        jsin = 60*Math.sin(j);
+    }
+    if(OPressed == true) {
+        k += 0.05;
+        ksin = 60*Math.sin(k);
+    }
+    if(PPressed == true) {
+        l += 0.05;
+        lsin = 60*Math.sin(l);
     }
 
     requestAnimationFrame(draw);
